@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Interativo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#projects">Projetos</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="section">
+        <div class="intro">
+            <h1>Transformando ideias em realidade digital</h1>
+            <p>Portfólio de um desenvolvedor web criativo</p>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2>Projetos</h2>
+        <div class="projects-grid">
+            <div class="project" onclick="openProject('project1.html')">
+                <div class="project-overlay"></div>
+                <h3>Projeto 1</h3>
+                <p>Descrição do projeto 1</p>
+            </div>
+            <div class="project" onclick="openProject('project2.html')">
+                <div class="project-overlay"></div>
+                <h3>Projeto 2</h3>
+                <p>Descrição do projeto 2</p>
+            </div>
+            <!-- Mais projetos -->
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>Sobre Mim</h2>
+        <p>Descrição sobre o desenvolvedor.</p>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Contato</h2>
+        <p>Entre em contato para mais informações.</p>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
