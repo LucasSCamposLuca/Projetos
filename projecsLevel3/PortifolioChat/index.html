@@ -3,24 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portifolio</title>
+    <title>Meu Portfólio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <nav>
-            <a href="#" class="animated-link">Home</a>
-            <a href="#" class="animated-link">Sobre</a>
-            <a href="#" class="animated-link">Blog</a>
-            <a href="#" class="animated-link">Contato</a>
-        </nav>
-        
+        <div id="alinhamentoHeader">
+            <button onclick="animar()" id="btn-menu">
+                <span class="linha"></span>
+                <span class="linha"></span>
+                <span class="linha"></span>
+            </button>
+            <nav>
+                <a href="#" class="animated-link">Home</a>
+                <a href="#" class="animated-link">Sobre</a>
+                <a href="#" class="animated-link">Blog</a>
+                <a href="#" class="animated-link">Contato</a>
+            </nav>
+        </div>
     </header>
+
     <main>
-        
+        <div class="container">
+            <div class="texto">
+                <h1>Texto de Exemplo</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit vitae quasi rem laboriosam. Totam accusamus eum doloribus nesciunt sequi incidunt qui. Nulla facere neque veniam eveniet atque, amet modi corporis.</p>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="IMG/2151683052.jpg" id="trocarImagem" width="100px" height="100px">
+            <button onclick="TrocarIMG()">Trocar Imagem</button>
+        </div>
     </main>
+
     <footer></footer>
-    
+
+    <script src="script.js"></script>
 </body>
 </html>

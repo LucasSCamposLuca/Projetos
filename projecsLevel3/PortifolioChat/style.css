@@ -8,17 +8,69 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    width: 100%;
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
+    background-image: url(IMG/2151478045.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#alinhamentoHeader{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+button{
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background: transparent;
+    cursor: pointer;
+}
+
+button.ativar .linha:nth-child(1){
+    transform: translateY(10px) rotate(-50deg);
+    background-color: rgb(36, 2, 2);
+}
+
+button.ativar .linha:nth-child(3){
+    transform: translateY(-10px) rotate(50deg);
+}
+
+button.ativar .linha:nth-child(2){
+    width: 0;
+}
+
+button.ativar{
+    border:  2px solid rgb(36, 2, 2);
+    box-shadow: 0 15px 20px rgb(36, 2, 2), 0 -5px -5px rgb(36, 2, 2);
+    transition: 0.5s;
+}
+
+.linha{
+    width: 35px;
+    height: 4px;
+    background-color: white;
+    display: block;
+    margin: 5px auto;
+    position: relative;
+    transform-origin: center;
+    transition: 0.3s;
 }
 
 .animated-link {
     text-decoration: none;
-    color: #000;
+    color: white;
     font-size: 24px;
     position: relative;
     padding-bottom: 5px;
+    margin: 20px;
 }
 
 .animated-link::after {
@@ -28,10 +80,38 @@ body {
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: #000000;
+    background-color: white;
     transition: width 0.3s ease-in-out;
 }
 
 .animated-link:hover::after {
     width: 100%;
+}
+
+.container{
+    width: 100%;
+    max-width: 500px;
+    background-color: transparent;
+    padding: 35px;
+    backdrop-filter: blur(0px);
+    margin-top: 20px;
+    border: solid wheat 3px;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: backdrop-filter 2s;
+}
+
+.texto{
+    color: white;
+    position: relative;
+    top: 200px;
+    transition: top 1s;
+}
+
+.container:hover .texto{
+    top: 0;
+}
+
+.container:hover{
+    backdrop-filter: blur(10px);
 }
