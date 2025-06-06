@@ -1,0 +1,200 @@
+body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: rgb(51,51,51);
+}
+
+#Titilo{
+    display: flex;
+    justify-content: center;
+}
+
+#tituloSvg{
+   display: flex;
+   justify-content: left;
+   align-items: center;
+   color: white;
+}
+
+/* main */
+#caixaProdutos{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(51,51,51);
+}
+#Produto{
+   width: 80%;
+   height: auto;
+   display: flex;
+   justify-content: center;
+   background-color: white;
+   border-radius: 20px;
+   margin: 10px;
+   padding: 10px;
+}
+
+#marcador{
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#marcadorCor{
+    background-color: gray;
+}
+
+#imgProduto{
+    width: 25%;
+    height: 100px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imgProduto img{
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+}
+
+#textoProduto{
+    width: 65%;
+    font-size: 19px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#textoProduto h4{
+    font-size: 19px;
+}
+
+#textoProduto p{
+    margin-bottom: 0px;
+    color: rgb(165, 165, 165);
+    font-size: 17px;
+}
+
+#boxConfirmar{
+    display: flex;
+    justify-content: center;
+}
+
+#btnConfirmar{
+    width: 30%;
+    color: white;
+    background-color: black;
+    border-radius: 20px;
+    border: none;
+    padding: 5px;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#btnConfirmar:hover{
+    background-color: gray;
+    transition: 1000ms;
+}
+
+.dropdown {
+    min-width: 15em;
+    position: relative;
+    margin: 2em;
+}
+
+.dropdown *{
+    box-sizing: border-box;
+}
+
+.select{
+    background: #2a2f3b;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px #2a2f3b solid;
+    border-radius: 0.5em;
+    padding: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 750px;
+}
+
+.select-clicked{
+    border: 2px #26489a solid;
+    box-shadow:  0 0 0.8em #26489a;
+}
+
+.select:hover{
+    background: #323741;
+}
+
+.caret{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #fff;
+    transition: 0.3s;
+}
+
+.caret-rotate {
+    transform: rotate(180deg);
+}
+
+.menu{
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background: #323741;
+    border: 1px #363a43 solid;
+    box-shadow: 0 0.5em 1em rgba(0,0,0, 0.2);
+    border-radius: 0.5em;
+    color: #9fa5b5;
+    position: block;
+    top: 3em;
+    left: 50%;
+    width: 100%;
+    transform: translate(0%);
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+    z-index: 1;
+}
+
+.menu li {
+    padding: 0.7em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background: #2a2d35;
+}
+
+.active {
+    background: #23242a;
+}
+
+.menu-open {
+    display: block;
+    opacity: 1;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+@media screen and (max-width : 990px) {
+    .select{
+       width: 90%;
+    }
+}
