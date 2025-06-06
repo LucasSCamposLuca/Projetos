@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom animations */
+@layer utilities {
+  @keyframes fade-in-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-down {
+    animation: fade-in-down 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+}
+
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fadeInUp.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-image-section {
+    padding: 10px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .scroll-image-section .scroll-content {
+    display: flex;
+    width: max-content;
+    animation: scroll-horizontal 50s linear infinite;
+    animation-delay: 2s;
+    gap: 100px;
+  }
+
+  @keyframes scroll-horizontal {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .scroll-image-section .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll-image-section .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scroll-image-section .image-wrapper {
+    flex-shrink: 0;
+    width: 224px;  /* Tailwind w-56 */
+    height: 160px; /* Tailwind h-40 */
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    background-color: #e5e7eb;
+    transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+    will-change: opacity, transform;
+  }
+
+  .scroll-image-section .image-wrapper.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .scroll-image-section .image-wrapper.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  @keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* opcional, para um efeito de subir suavemente */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes rotate3D {
+          0% {
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+          }
+          50% {
+            transform: rotateX(20deg) rotateY(360deg) rotateZ(45deg);
+          }
+          100% {
+            transform: rotateX(0deg) rotateY(720deg) rotateZ(0deg);
+          }
+        }
+
+        .rotate-3d-animation {
+          animation: rotate3D 10s linear infinite;
+          transform-style: preserve-3d;
+          perspective: 1000px;
+          width: 400px;
+          height: 400px;
+        }
+

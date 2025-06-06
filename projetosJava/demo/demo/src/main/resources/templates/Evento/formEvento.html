@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Evento</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #1a1a1a, #333);
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+        }
+
+        .container {
+            margin-top: 50px;
+            perspective: 1000px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .input-field label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .input-field input {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .input-field input:focus {
+            border-bottom: 1px solid #6200ea;
+            box-shadow: 0 1px 0 #6200ea;
+        }
+
+        .btn {
+            background-color: #6200ea; /* Cor do botão */
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) rotateX(10deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-panel {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Cadastrar Evento</h1>
+    <form th:action="@{/cadastrarEvento}" method="post">
+        <div class="input-field">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <div class="input-field">
+            <label for="local">Local:</label>
+            <input type="text" id="local" name="local" required>
+        </div>
+        <div class="input-field">
+            <label for="data">Data:</label>
+            <input type="text" id="data" name="data" class="datepicker" required>
+        </div>
+        <div class="input-field">
+            <label for="horario">Horário:</label>
+            <input type="text" id="horario" name="horario" required>
+        </div>
+        <button type="submit" class="btn">Cadastrar Evento</button>
+    </form>
+
+    <div th:if="${mensagem}" class="card-panel teal lighten-2">
+        <span class="white-text" th:text="${mensagem}"></span>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.datepicker');
+        M.Datepicker.init(elems, { format: 'dd-mm-yyyy' });
+    });
+</script>
+
+</body>
+</html>
+

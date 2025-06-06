@@ -1,0 +1,87 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+body{
+    text-align: center;
+    background: rgb(57,57,57);
+    background: linear-gradient(0deg, rgba(57,57,57,1) 28%, rgba(0,0,0,1) 100%);
+    color: white;
+    background-image: url(IMG/2150800037.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+header{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+
+.Container{
+    width: 70%;
+    height: auto;
+    padding: 40px;
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    color: white;
+    box-shadow: black 5px 5px 5px;
+}
+
+h1{
+    color: white;
+    margin-bottom: 20px;
+    font-size: 40px;
+}
+
+.input-style{
+    color: white;
+    margin: 10px;
+    font-size: 30px;
+}
+
+.input-style input{
+    font-size: 25px;
+    border-radius: 20px;
+    padding: 5px;
+    border-style:none;
+}
+
+.btn-submit{
+    background-color: rgb(255, 255, 255);
+    font-size: 25px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 20px;
+
+}
+
+footer{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
