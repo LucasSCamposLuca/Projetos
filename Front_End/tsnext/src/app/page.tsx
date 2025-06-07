@@ -1,427 +1,238 @@
-'use client';
+'use client'
+import Image from 'next/image';
+import { useEffect, useState } from 'react'
+import React from 'react';
 
-import { useEffect, useRef, useState } from 'react';
 
-export default function Homepage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const welcomeRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]); // ref para os cards
-  const [welcomeVisible, setWelcomeVisible] = useState(false);
-  
-  
+export default function Home() {
+  const [text, setText] = useState('')
+  const fullText = 'Moda que inspira seu estilo único'
 
-  const produtos = [
-    {
-      nome: 'Camiseta Azul',
-      imagem:
-        'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=60',
-    },
-    {
-      nome: 'Tênis Esportivo',
-      imagem:
-        'https://images.unsplash.com/photo-1558004282-e2b2587e3e47?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      nome: 'Calça Moda masculina',
-      imagem:
-        'https://images.unsplash.com/photo-1584865288642-42078afe6942?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      nome: 'Jaqueta Corrida',
-      imagem:
-        'https://images.unsplash.com/photo-1552327359-d86398116072?q=80&w=1963&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-  ];
+  const cards = [
+  {
+    imagem: "https://plus.unsplash.com/premium_photo-1661319134179-50e9552b63c0?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fCVDMyVCM2N1bG9zfGVufDB8fDB8fHww",
+    titulo: "Óculos Fashion",
+    texto: "Estilo e proteção para seu dia a dia.",
+  },
+  {
+    imagem: "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Ym9sc2FzfGVufDB8fDB8fHww",
+    titulo: "Bolsas Exclusivas",
+    texto: "Elegância para todas as ocasiões.",
+  },
+  {
+    imagem: "https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cmVsJUMzJUIzZ2lvc3xlbnwwfHwwfHx8MA%3D%3D",
+    titulo: "Relógios Modernos",
+    texto: "Pontualidade com sofisticação.",
+  },
+  {
+    imagem: "https://images.unsplash.com/photo-1590166223826-12dee1677420?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJyaW5jb3N8ZW58MHx8MHx8fDA%3D",
+    titulo: "Brincos Finos",
+    texto: "Toque de brilho em cada detalhe.",
+  },
+  {
+    imagem: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHNhcGF0b3N8ZW58MHx8MHx8fDA%3D",
+    titulo: "Sapatos Premium",
+    texto: "Conforto e estilo nos seus passos.",
+  },
+  {
+    imagem: "https://plus.unsplash.com/premium_photo-1674617465296-1d8dd5e549ea?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cHVsc2VpcmFzfGVufDB8fDB8fHww",
+    titulo: "Pulseiras Delicadas",
+    texto: "Complemento perfeito para seu look.",
+  },
+];
 
-  const images = [
-    'https://images.unsplash.com/photo-1580047883831-5db03837b0b3?q=80&w=1887&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1548126032-079a0fb0099d?q=80&w=1887&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1557002666-513ca8eaa3c8?q=80&w=1887&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1641311821670-d746f909dc78?q=80&w=1935&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1616715623022-65d18f0042ae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fGphcXVldGF8ZW58MHx8MHx8fDA%3D',
-    'https://images.unsplash.com/photo-1608063615781-e2ef8c73d114?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  ];
 
-  const loopImages = [...images, ...images];
-
-  // Scroll horizontal infinito para as imagens
   useEffect(() => {
-    
-    const container = scrollRef.current;
-    if (!container) return;
+    let index = 0
+    const typing = setInterval(() => {
+      setText(prev => prev + fullText.charAt(index))
+      index++
+      if (index === fullText.length) clearInterval(typing)
+    }, 100)
+    return () => clearInterval(typing)
+  }, [])
 
-    let animationFrameId: number;
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const email = (form.email as HTMLInputElement).value
+    const messageEl = document.getElementById('form-message')
 
-    const scroll = () => {
-      container.scrollLeft += 0.5;
-
-      if (container.scrollLeft >= container.scrollWidth / 2) {
-        container.scrollLeft = 0;
+    if (/\S+@\S+\.\S+/.test(email)) {
+      if (messageEl) {
+        messageEl.textContent = 'Obrigado por se inscrever!'
+        messageEl.className = 'text-green-600 font-semibold mt-2'
       }
-
-      animationFrameId = requestAnimationFrame(scroll);
-    };
-
-    animationFrameId = requestAnimationFrame(scroll);
-
-    return () => cancelAnimationFrame(animationFrameId);
-  }, []);
-
-  // Mostrar welcome com animação fade + slide
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setWelcomeVisible(true);
-    }, 100);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  // Intersection Observer para animar cards ao aparecer na viewport
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    cardsRef.current.forEach((card) => {
-      if (!card) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            card.classList.add('opacity-100', 'translate-y-0');
-            card.classList.remove('opacity-0', 'translate-y-10');
-            observer.unobserve(card);
-          }
-        },
-        { threshold: 0.1 }
-      );
-
-      observer.observe(card);
-      observers.push(observer);
-    });
-
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
-  }, [produtos]);
-
-  // Estado para controlar imagens carregadas (fade-in)
-  const [loadedImages, setLoadedImages] = useState<boolean[]>(
-    Array(loopImages.length).fill(false)
-  );
-
-  // Função chamada ao carregar imagem para setar fade-in
-  function handleImageLoad(index: number) {
-    setLoadedImages((prev) => {
-      const newLoaded = [...prev];
-      newLoaded[index] = true;
-      return newLoaded;
-    });
+      form.reset()
+    } else {
+      if (messageEl) {
+        messageEl.textContent = 'Por favor, insira um e-mail válido.'
+        messageEl.className = 'text-red-600 font-semibold mt-2'
+      }
+    }
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100   "> //fade-in
-      {/* Sidebar */}
-      <aside
-        className={`fixed z-40 top-0 left-0 h-full w-64 bg-white shadow-md p-6 transform transition-transform duration-300 ease-in-out
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
-      >
-        <h2 className="text-xl font-bold mb-6">Menu</h2>
-        <nav className="flex flex-col gap-4">
-          <a href="#" className="text-gray-700 hover:text-blue-500">
-            Dashboard
-          </a>
-          <a href="#" className="text-gray-700 hover:text-blue-500">
-            Produtos
-          </a>
-          <a href="#" className="text-gray-700 hover:text-blue-500">
-            Pedidos
-          </a>
-          <a href="#" className="text-gray-700 hover:text-blue-500">
-            Configurações
-          </a>
-        </nav>
-      </aside>
-
-      {/* Overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      {/* Conteúdo principal */}
-      <div className="flex flex-col flex-1 ml-0 md:ml-0">
-        {/* Navbar */}
-        <header className="bg-white shadow-md px-6 py-4 flex justify-center items-center z-10">
-          <button
-            className="p-2 text-gray-800"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+    <>
+      <header className="bg-black text-white sticky top-0 z-50">
+        <nav className="flex justify-between items-center px-6 py-4">
+          <div className="text-2xl font-bold tracking-wide">Moda fast</div>
+          <ul className="hidden md:flex gap-6">
+            <li><a href="#Apresentacao">Início</a></li>
+            <li><a href="#Servicos">Coleção</a></li>
+            <li><a href="#Estatisticas">Números</a></li>
+            <li><a href="#Marcas">Marcas</a></li>
+            <li><a href="#Comentarios">Depoimentos</a></li>
+            <li><a href="#Contatos">Contato</a></li>
+          </ul>
+          <button className="bg-rose-400 hover:bg-rose-500 text-white px-5 py-2 rounded-full font-semibold">
+            Comprar Agora
           </button>
+        </nav>
+      </header>
 
-          <div className="text-center text-2xl font-bold text-blue-600">
-            Moda Fast
+      <main>
+        {/* Hero */}
+        <section id="Apresentacao" className="flex flex-wrap justify-around items-center gap-10 px-6 py-20 bg-pink-50">
+          <div className="max-w-lg">
+            <h1 className="text-4xl font-bold mb-4">{text}<span className="animate-pulse">|</span></h1>
+            <p className="text-gray-600 text-lg mb-6">Descubra as últimas tendências para transformar seu visual com exclusividade e elegância.</p>
+            <a href="#Servicos" className="bg-rose-400 hover:bg-rose-500 text-white px-6 py-2 rounded-full font-semibold">Ver Coleção</a>
           </div>
-        </header>
+          <img className="max-w-sm rounded-xl shadow-xl" src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=300&auto=format&fit=crop&q=60" alt="Moda feminina" />
+        </section>
 
-        {/* Seção Boas-Vindas com fade + slide */}
-{/* Seção de Apresentação com Efeito de Digitação */}
-<section
-  className="relative h-[600px] flex items-center justify-center overflow-hidden bg-fixed bg-cover bg-center text-white"
-  style={{
-    backgroundImage:
-      "url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1400&q=60')",
-    boxShadow: '0 10px 15px rgba(0, 0, 0, 0.2)',
-  }}
->
-  <div
-    ref={welcomeRef}
-    className={`relative text-center bg-black/30 p-6 rounded-lg inline-block transition-all duration-700 ease-in-out 
-      ${welcomeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-  >
-    <h1 className="text-4xl font-bold drop-shadow-lg typing">
-      Bem-vindo à <span className="text-yellow-300">Moda Fast</span>
-    </h1>
-    <p className="mt-4 text-lg drop-shadow-sm">
-      Moda é mais do que vestir — é expressar quem você é todos os dias.
-    </p>
-  </div>
+        {/* Coleção com scroll infinito */}
+    <section className="relative w-full overflow-hidden bg-gray-100 m-[10px] rounded-xl">
+      <div className="flex gap-6 animate-scrollLoop w-[200%] p-4">
+        {[...Array(2)].map((_, loopIndex) => (
+          <div key={loopIndex} className="flex gap-6">
+            {cards.map((card, i) => (
+              <div
+                key={`${loopIndex}-${i}`}
+                className="min-w-[280px] bg-white p-4 rounded-xl shadow-md text-center"
+              >
+                <img
+                  className="w-full h-64 object-cover rounded-lg mb-4"
+                  src={card.imagem}
+                  alt={card.titulo}
+                />
+                <h3 className="text-xl font-semibold text-rose-700 mb-2">{card.titulo}</h3>
+                <p className="text-gray-600">{card.texto}</p>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
 
-  <style>
-    {`
-      .typing {
-        overflow: hidden;
-        border-right: .15em solid white;
-        white-space: nowrap;
-        margin: 0 auto;
-        letter-spacing: .1em;
-        animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
-        max-width: 100%;
-      }
+        {/* Estatísticas */}
+        <section id="Estatisticas" className="bg-gray-100 py-20 text-center text-gray-700">
+          <h2 className="text-3xl font-bold mb-10">Nossos Números</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 px-6">
+            {[
+              { label: 'Clientes satisfeitos', value: 500 },
+              { label: 'Peças vendidas', value: 1200 },
+              { label: 'Anos de experiência', value: 27 },
+              { label: 'Marcas parceiras', value: 8 },
+            ].map((stat, idx) => (
+              <div key={idx} className="flex flex-col items-center">
+                <h3 className="text-4xl font-bold text-black">{stat.value}</h3>
+                <p className="font-medium">{stat.label}</p>
+                <div className="w-full h-2 mt-2 bg-gray-300 rounded-full overflow-hidden">
+                  <div className="h-full bg-black rounded-full transition-all duration-1000" style={{ width: `${Math.min(stat.value / 12, 100)}%` }}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      @keyframes typing {
-        from { width: 0 }
-        to { width: 100% }
-      }
+        {/* Marcas Parceiras */}
+        <section id="marcasParceiras" className="bg-white py-20 px-6 text-center">
+            <h2 className="text-3xl font-bold text-gray-800 mb-10">Marcas Parceiras</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 items-center justify-center grayscale hover:grayscale-0 transition-all">
+          <img src="/image 3.svg" alt="Chanel" className="h-12 mx-auto" />
+          <img src="/image 2.svg" alt="Gucci" className="h-12 mx-auto" />
+          <img src="/image 4.svg" alt="Prada" className="h-12 mx-auto" />
+          <img src="/image 5.svg" alt="Louis Vuitton" className="h-10 mx-auto" />
+          <img src="/image 9.svg" alt="Dior" className="h-12 mx-auto" />
+          <img src="/image 6.svg" alt="Balenciaga" className="h-6 mx-auto" />
+          <img src="/image 7.svg" alt="Versace" className="h-12 mx-auto" />
+          <img src="/image 8.svg" alt="Burberry" className="h-8 mx-auto" />
+          </div>
+        </section>
 
-      @keyframes blink-caret {
-        from, to { border-color: transparent }
-        50% { border-color: white }
-      }
-    `}
-  </style>
-</section>
 
+        {/* Vídeo de moda */}
+        <section id="VideoFashion" className="px-6 py-20 bg-pink-50 flex flex-wrap justify-center gap-10">
+          <div className="max-w-xl">
+            <h2 className="text-3xl font-bold mb-4">Inspire-se com Estilo</h2>
+            <p className="text-gray-600 text-lg">Explore o universo da moda em movimento. Assista ao nosso vídeo exclusivo e mergulhe em uma coleção que combina elegância e atitude. Mude a forma com a qual vê a moda e transforme sua vida como nunca imaginou antes</p>
+          </div>
+          <div className="w-full max-w-xl aspect-video">
+            <iframe
+              className="w-full h-full rounded-lg shadow-lg"
+              src="https://www.youtube.com/embed/BdYXH6vIEnQ"
+              title="YouTube video"
+              allowFullScreen
+            />
+          </div>
+        </section>
 
+        {/* Testemunhos */}
+        <section id="Comentarios" className="bg-white px-6 py-20 text-center">
+          <h2 className="text-3xl font-bold text-gray-800 mb-10">O que dizem nossos clientes</h2>
+          <div className="flex flex-wrap justify-center gap-6">
+            {[
+              'Adoro a qualidade e o atendimento!',
+              'Entrega rápida e produtos incríveis.',
+              'Minha loja favorita para looks sofisticados.',
+            ].map((quote, idx) => (
+              <blockquote key={idx} className="bg-pink-50 p-6 rounded-xl shadow-md max-w-sm italic">
+                <p className="mb-4">"{quote}"</p>
+                <footer className="font-semibold text-rose-600">– Cliente Satisfeito</footer>
+              </blockquote>
+            ))}
+          </div>
+        </section>
 
-        
+        {/* Newsletter */}
+        <section id="Cards" className="bg-white px-6 py-20 text-center">
+          <div className="max-w-xl mx-auto">
+            <h2 className="text-3xl font-bold mb-4">Receba nossas novidades</h2>
+            <p className="text-gray-600 text-lg mb-6">Inscreva-se para receber as últimas tendências e promoções exclusivas direto no seu e-mail.</p>
+            <form onSubmit={handleSubmit} className="flex flex-wrap gap-4 justify-center">
+              <input type="email" name="email" placeholder="Seu melhor e-mail" required className="border border-rose-300 rounded-full px-4 py-2 text-lg w-full sm:w-auto" />
+              <button type="submit" className="bg-rose-400 hover:bg-rose-500 text-white px-6 py-2 rounded-full font-semibold">Assinar</button>
+            </form>
+            <p id="form-message" className="mt-4"></p>
+          </div>
+        </section>
+      </main>
 
-        {/* Cards */}
-        <main className="p-6">
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
-    {produtos.map((produto, index) => (
-      <div
-        key={index}
-        ref={(el) => (cardsRef.current[index] = el)}
-        className="bg-white shadow-md rounded-lg overflow-hidden transform transition-all duration-700 opacity-0 translate-y-10 hover:scale-105 hover:shadow-lg group"
-      >
-        <div className="overflow-hidden">
-          <img
-            src={produto.imagem}
-            alt={produto.nome}
-            className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-          />
+      {/* Footer */}
+      <footer className="bg-black text-gray-300 py-10 px-6">
+        <div className="flex flex-wrap justify-around gap-8">
+          <div>
+            <h2 className="text-rose-400 text-xl font-bold mb-2">Contato</h2>
+            <p>Email: contato@fashiontrend.com</p>
+            <p>Telefone: (11) 99999-9999</p>
+          </div>
+          <div>
+            <h2 className="text-rose-400 text-xl font-bold mb-2">Endereço</h2>
+            <p>Rua da Moda, 123 - São Paulo, SP</p>
+          </div>
+          <div>
+            <h2 className="text-rose-400 text-xl font-bold mb-2">Siga-nos</h2>
+            <div className="flex gap-4 text-2xl">
+              <a href="#" aria-label="Instagram">📸</a>
+              <a href="#" aria-label="Facebook">👍</a>
+              <a href="#" aria-label="Twitter">🐦</a>
+            </div>
+          </div>
         </div>
-        <div className="p-4">
-          <h3 className="text-lg font-semibold">{produto.nome}</h3>
-          <p className="text-gray-600">Descrição breve do produto.</p>
-        </div>
-      </div>
-    ))}
-  </div>
-</main>
-
-        {/* Seções explicativas sobre moda */}
-<section className="px-6 py-12 bg-white">
-  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
-    <div className="flex flex-col items-center text-center">
-      <img
-        src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=800&q=60"
-        alt="Tendências de Moda"
-        className="w-full h-48 object-cover rounded-lg mb-4 shadow-lg transition-transform duration-300 hover:scale-105"
-      />
-      <h2 className="text-2xl font-bold mb-2">Tendências de Moda</h2>
-      <p className="text-gray-700">
-        Fique por dentro das últimas tendências que estão dominando as passarelas e as ruas, para você estar sempre atualizado e elegante.
-      </p>
-    </div>
-
-    <div className="flex flex-col items-center text-center">
-      <img
-        src="https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=800&q=60"
-        alt="Moda Sustentável"
-        className="w-full h-48 object-cover rounded-lg mb-4 shadow-lg transition-transform duration-300 hover:scale-105"
-      />
-      <h2 className="text-2xl font-bold mb-2">Moda Sustentável</h2>
-      <p className="text-gray-700">
-        Conheça práticas conscientes e escolhas sustentáveis que fazem bem para o planeta sem abrir mão do estilo e da qualidade.
-      </p>
-    </div>
-
-    <div className="flex flex-col items-center text-center">
-      <img
-        src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=60"
-        alt="Estilos Clássicos"
-        className="w-full h-48 object-cover rounded-lg mb-4 shadow-lg transition-transform duration-300 hover:scale-105"
-      />
-      <h2 className="text-2xl font-bold mb-2">Estilos Clássicos</h2>
-      <p className="text-gray-700">
-        Saiba como incorporar peças clássicas e atemporais no seu guarda-roupa, garantindo versatilidade e elegância para todas as ocasiões.
-      </p>
-    </div>
-
-    <div className="flex flex-col items-center text-center">
-      <img
-        src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=60"
-        alt="Dicas de Combinação"
-        className="w-full h-48 object-cover rounded-lg mb-4 shadow-lg transition-transform duration-300 hover:scale-105"
-      />
-      <h2 className="text-2xl font-bold mb-2">Dicas de Combinação</h2>
-      <p className="text-gray-700">
-        Aprenda truques para combinar cores, estampas e acessórios e criar looks harmoniosos que destacam sua personalidade.
-      </p>
-    </div>
-  </div>
-</section>
-
-{/* Nova seção lado a lado */}
-<section className="w-full mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-10 bg-white text-neutral-900 rounded-lg shadow-lg border border-gray-300">
-  <div className="md:w-1/2">
-    <h2 className="text-3xl font-bold mb-4">A Importância da Moda na Autoexpressão</h2>
-    <p className="text-lg leading-relaxed">
-      A moda vai além do simples vestir; ela é uma poderosa forma de comunicar quem somos, refletindo nossa personalidade,
-      cultura e valores. Escolher o que usar é um ato de criatividade e autenticidade, que pode influenciar a autoestima e o
-      modo como nos relacionamos com o mundo ao nosso redor.
-    </p>
-  </div>
-  <div className="md:w-1/2">
-    <img
-      src="https://images.unsplash.com/flagged/photo-1578398297852-4d2bfe74cefe?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      alt="Autoexpressão pela moda"
-      className="rounded-lg shadow-lg w-full object-cover max-h-96"
-    />
-  </div>
-</section>
-
-<section className="scroll-image-section">
-  <div className="scroll-content no-scrollbar">
-    {loopImages.map((img, i) => (
-      <div
-        key={i}
-        className={`image-wrapper ${loadedImages[i] ? 'visible' : 'hidden'}`}
-      >
-        <img
-          src={img}
-          alt={`Scroll Image ${i + 1}`}
-          onLoad={() => handleImageLoad(i)}
-          draggable={false}
-        />
-      </div>
-    ))}
-  </div>
-</section>
-
-
-
-{'Testes'}
-{/* <section>
-  <div className="flex justify-center items-center h-screen bg-gray-900">
-        <img
-          className="rotate-3d-animation rounded-lg shadow-lg"
-          src="https://images.unsplash.com/flagged/photo-1578398297852-4d2bfe74cefe?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Imagem 3D rotacionando"
-        />
-      </div>
-
-
-  <div className="mx-auto max-w-md overflow-hidden rounded-xl bg-white shadow-md md:max-w-2xl">
-  <div className="md:flex">
-    <div className="md:shrink-0">
-      <img
-        className="h-48 w-full object-cover md:h-full md:w-48"
-        src="/img/building.jpg"
-        alt="Modern building architecture"
-      />
-    </div>
-    <div className="p-8">
-      <div className="text-sm font-semibold tracking-wide text-indigo-500 uppercase">Company retreats</div>
-      <a href="#" className="mt-1 block text-lg leading-tight font-medium text-black hover:underline">
-        Incredible accommodation for your team
-      </a>
-      <p className="mt-2 text-gray-500">
-        Looking to take your team away on a retreat to enjoy awesome food and take in some sunshine? We have a list of
-        places to do just that.
-      </p>
-    </div>
-  </div>
-</div>
-
-
-</section> */}
-<footer className="bg-gray-900 text-white py-10 mt-10">
-  <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-    
-    {/* Informações de contato */}
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Entre em Contato</h2>
-      <p className="mb-2">Empresa Fictícia</p>
-      <p className="mb-2">Email: contato@empresa.com</p>
-      <p className="mb-2">Telefone: (11) 91234-5678</p>
-      <p>Endereço: Av. Imaginária, 456 - São Paulo, SP</p>
-    </div>
-
-    {/* Redes sociais com Material Icons */}
-    <div className="md:text-right">
-      <h2 className="text-xl font-semibold mb-4">Siga nas Redes</h2>
-      <div className="flex md:justify-end gap-4 text-2xl">
-        <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500">
-          <span className="material-icons">facebook</span>
-        </a>
-        <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500">
-          <span className="material-icons">instagram</span>
-        </a>
-        <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400">
-          <span className="material-icons">linkedin</span>
-        </a>
-        <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-red-600">
-          <span className="material-icons">email</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div className="text-center text-gray-400 text-sm mt-8">
-    © 2025 Empresa Fictícia. Todos os direitos reservados.
-  </div>
-</footer>
-
-
-
-      </div>
-    </div>
-  );
+        <p className="text-center mt-10 text-sm text-gray-400">© 2025 FashionTrend. Todos os direitos reservados.</p>
+      </footer>
+    </>
+  )
 }
